@@ -1,7 +1,7 @@
 import { ATAI_API_KEY, ATAI_API_ENDPOINT } from '$env/static/private';
 
 const API_VERSION = 'v0.5';
-const MODEL = 'Newton::c2_4_7b_251215a172f6d7';
+const MODEL = 'Newton::c2_5_8b_260413b723a9ab';
 
 const SYSTEM_PROMPT =
 	'You are an energy grid analyst AI monitoring the California Independent System Operator (CAISO) power grid in real-time. ' +
