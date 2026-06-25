@@ -1,9 +1,10 @@
 import { ATAI_API_KEY, ATAI_API_ENDPOINT } from '$env/static/private';
 
 const API_VERSION = 'v0.5';
-const MODEL = 'Newton::c2_5_8b_260413b723a9ab';
+// C 2.6 fusion checkpoint, per the atai-newton-fusion-model skill.
+const MODEL = 'Newton::c2_6_8b_fp8_260424d7a55d5e';
 
-const SYSTEM_PROMPT =
+const INSTRUCTION_PROMPT =
 	'You are an energy grid analyst AI monitoring the California Independent System Operator (CAISO) power grid in real-time. ' +
 	'You help users understand grid conditions, generation mix, demand patterns, and renewable energy performance. ' +
 	'Key concepts: the "duck curve" (midday solar surplus followed by evening ramp), renewable curtailment, ' +
@@ -25,13 +26,15 @@ export async function queryNewton(query) {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
+				// The system turn goes in `instruction_prompt`. C 2.6 honors only this
+				// field; the legacy `system_prompt` is inert on this checkpoint, so we
+				// don't send it (per the atai-newton-fusion-model skill).
 				query,
-				system_prompt: SYSTEM_PROMPT,
-				instruction_prompt: SYSTEM_PROMPT,
+				instruction_prompt: INSTRUCTION_PROMPT,
 				file_ids: [],
 				model: MODEL,
-				max_new_tokens: 1024,
-				sanitize: false
+				// Grid analyses (duck-curve, ramp, risk) run long; 1024 truncated them.
+				max_new_tokens: 3072
 			}),
 			signal: controller.signal
 		});
