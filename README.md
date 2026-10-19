@@ -18,7 +18,7 @@ Visualizes the California electricity grid's supply mix and demand in real-time 
 
 - **SvelteKit** with Svelte 5 runes
 - **Archetype AI Design System** — semantic tokens, component primitives, composite patterns
-- **Newton API** — Direct Query endpoint (`/v0.5/query`) for text reasoning with the C 2.6 fusion model (`Newton::c2_6_8b_fp8_260424d7a55d5e`), per the [`atai-newton-fusion-model`](https://github.com/archetypeai/agent-skills/tree/main/skills/atai-newton-fusion-model) skill
+- **Newton API** — Direct Query endpoint (`/api/lens/query`) for text reasoning with the C 2.6 fusion model (`Newton::c2_6_8b_fp8_260424d7a55d5e`), per the [`atai-newton-fusion-model`](https://github.com/archetypeai/agent-skills/tree/main/skills/atai-newton-fusion-model) skill
 - **CAISO Today's Outlook** — public CSV feeds for demand and supply (5-min intervals)
 - **Tailwind v4** — styling with semantic design tokens
 
@@ -32,7 +32,7 @@ Create a `.env` file:
 
 ```
 ATAI_API_KEY=your_api_key_here
-ATAI_API_ENDPOINT=https://api.u1.archetypeai.app/
+ATAI_API_ENDPOINT=https://platform.u1.archetypeai.app
 ```
 
 ## Development
@@ -55,7 +55,7 @@ Open `http://localhost:5173`. Grid data loads automatically. Use the chat to ask
 1. Server fetches today's demand and supply CSVs from CAISO (288 rows/day at 5-min intervals)
 2. Supply chart renders a stacked area showing the generation mix — solar dominates midday, gas ramps for evening
 3. Demand chart overlays actual demand against day-ahead and hour-ahead forecasts
-4. Chat sends recent grid data (last hour of demand + supply) as context to Newton's `/v0.5/query` endpoint
+4. Chat sends recent grid data (last hour of demand + supply) as context to Newton's `/api/lens/query` endpoint
 5. Newton reasons about grid conditions: duck curve timing, renewable curtailment, battery dispatch, peak stress
 
 ## Example Questions for Newton
