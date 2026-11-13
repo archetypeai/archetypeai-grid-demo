@@ -65,3 +65,14 @@ Open `http://localhost:5173`. Grid data loads automatically. Use the chat to ask
 - "Is current demand higher or lower than the day-ahead forecast? Why might that be?"
 - "What percentage of generation is from renewables right now?"
 - "Are there signs of grid stress or tight supply conditions?"
+
+## Licence
+
+The code is under the [Apache License 2.0](LICENSE). The repo holds no grid data: the
+app fetches CAISO's Today's Outlook CSVs live (see [Data Sources](#data-sources)). That
+data belongs to CAISO, is subject to CAISO's [Terms of Use](https://www.caiso.com/Pages/Legal.aspx),
+and isn't covered by the Apache licence.
+
+The PP Neue Montreal fonts in `static/fonts/` are copyright Pangram Pangram Foundry and
+aren't covered by the Apache licence either. The files in `.claude/` carry their own MIT
+licence ([`.claude/LICENSE`](.claude/LICENSE)).
